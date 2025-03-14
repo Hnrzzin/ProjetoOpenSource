@@ -1,0 +1,65 @@
+msalto1 = 0.0
+psalto1 = 999.0
+soma_pontos1 = 0.0
+mmedia = 0.0
+campeao = 'Nenhum'
+total1 = 0.0
+p1 = 'Nenhum'
+empate = False
+vencedor = False
+
+print('-' * 40, end=' ')
+print("SEJA BEM VINDO A COMPETIÇÃO!", end=' ')
+print('-' * 40)
+resp = input("DESEJA INICIAR O PROGRAMA? SIM/NÃO: ").upper()
+while resp not in ['SIM', 'NÃO']:
+    print("COMANDO NÃO ACEITO")
+    resp = input("DESEJA INICIAR O PROGRAMA? SIM/NÃO: ").upper()
+    if resp == 'NÃO':
+        print("Competição sem campeão!")
+        break
+
+mmedia = -999.0
+while resp == 'SIM':
+    p1 = input("Insira o nome do atleta: ")
+    print('-' * 50)
+
+    msalto1 = -999.0
+    psalto1 = 999.0
+    soma_pontos1 = 0.0
+    
+    for saltos in range(5):
+        salto1 = float(input(f"Insira a pontuação do atleta {p1} no {saltos + 1}° salto: "))
+        soma_pontos1 += salto1
+        if salto1 > msalto1:
+            msalto1 = salto1
+        if salto1 < psalto1:
+            psalto1 = salto1
+    
+    total1 = (soma_pontos1 - psalto1 - msalto1) / 3
+    if total1 > mmedia:
+        mmedia = total1
+        campeao = p1
+        vencedor = True
+    elif total1 == mmedia:
+        empate = True
+
+    print("\nMelhor salto:", msalto1, "m")
+    print("Pior salto:", psalto1, "m")
+    print(f"Média dos demais saltos: {total1:.1f} m")
+    print("\nResultado final:")
+    print(f"{p1}: {total1:.1f} m")
+    print('-' * 50)
+    resp = input("Deseja continuar? SIM/NÃO: ").upper()
+    
+    while resp not in ['SIM', 'NÃO']:
+        print("COMANDO NÃO ACEITO")
+        resp = input("Deseja continuar? SIM/NÃO: ").upper()
+        
+print('-' * 50)
+if resp == 'NÃO' and campeao == 'Nenhum':
+    print("Competição sem campeão!")
+elif empate:
+    print (f'Jogo empatado, campeão foi {p1}')
+elif vencedor:
+    print(f"Atleta campeão: {campeao} com média de {mmedia:.1f} m")
